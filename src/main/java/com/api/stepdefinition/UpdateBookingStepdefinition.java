@@ -35,8 +35,6 @@ public class UpdateBookingStepdefinition {
 		String token = context.response.path("token");
 		LOG.info("Auth Token: "+token);
 		context.session.put("token", "token="+token);	
-		System.out.println("hello");
-		System.out.println("hello");
 		
 	}
 
