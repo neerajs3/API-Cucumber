@@ -1,6 +1,5 @@
 package com.api.stepdefinition;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.apache.log4j.LogManager;
@@ -24,10 +23,6 @@ public class ViewBookingDetailsStepdefinition {
 		this.context = context;
 	}
 
-	@Given("user has access to endpoint {string}")
-	public void userHasAccessToEndpoint(String endpoint) {		
-		context.session.put("endpoint", endpoint);
-	}
 
 	@When("user makes a request to view booking IDs")
 	public void userMakesARequestToViewBookingIDs() {
@@ -38,10 +33,6 @@ public class ViewBookingDetailsStepdefinition {
 		context.session.put("bookingID", bookingID);
 	}
 
-	@Then("user should get the response code {int}")
-	public void userShpuldGetTheResponseCode(Integer statusCode) {
-		assertEquals(Long.valueOf(statusCode), Long.valueOf(context.response.getStatusCode()));
-	}
 
 	@Then("user should see all the booking IDs")
 	public void userShouldSeeAllTheBookingIDS() {		

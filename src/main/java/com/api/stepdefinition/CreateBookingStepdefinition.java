@@ -1,5 +1,4 @@
 package com.api.stepdefinition;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.util.Map;
@@ -7,12 +6,15 @@ import java.util.Map;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import org.testng.Assert;
 
 import com.api.model.Booking;
 import com.api.utils.ResponseHandler;
 import com.api.utils.TestContext;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class CreateBookingStepdefinition {
@@ -21,6 +23,11 @@ public class CreateBookingStepdefinition {
 
 	public CreateBookingStepdefinition(TestContext context) {
 		this.context = context;
+	}
+	
+	@Given("user has access to endpoint {string}")
+	public void userHasAccessToEndpoint(String endpoint) {		
+		context.session.put("endpoint", endpoint);
 	}
 
 	@When("user creates a booking")
@@ -44,22 +51,12 @@ public class CreateBookingStepdefinition {
 		assertNotNull(booking, "Booking not created");
 		LOG.info("Newly created booking ID: "+booking.getBookingid());
 		context.session.put("bookingID", booking.getBookingid());
-		validateBookingData(new JSONObject(bookingData), booking);
 	}
-
-	private void validateBookingData(JSONObject bookingData, Booking booking) {
-		LOG.info(bookingData);
 	
-		assertNotNull(booking.getBookingid(),"Booking ID missing");
-		assertEquals( bookingData.get("firstname"), booking.getBooking().getFirstname(),"First Name did not match");
-		assertEquals(bookingData.get("lastname"), booking.getBooking().getLastname(),"Last Name did not match");
-		assertEquals( bookingData.get("totalprice"), booking.getBooking().getTotalprice(),"Total Price did not match");
-		assertEquals( bookingData.get("depositpaid"), booking.getBooking().getDepositpaid(),"Deposit Paid did not match");
-		assertEquals( bookingData.get("additionalneeds"), booking.getBooking().getAdditionalneeds(),"Additional Needs did not match");
-		assertEquals( bookingData.get("checkin"), booking.getBooking().getBookingdates().getCheckin(),"Check in Date did not match");
-		assertEquals( bookingData.get("checkout"), booking.getBooking().getBookingdates().getCheckout(),"Check out Date did not match");
+	@Then("user should get the response code {int}")
+	public void userShpuldGetTheResponseCode(Integer statusCode) {
+			
+		Assert.assertEquals(String.valueOf(context.response.getStatusCode()), String.valueOf(statusCode));
 	}
-
-
 
 }

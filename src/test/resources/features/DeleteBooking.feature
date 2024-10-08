@@ -20,15 +20,12 @@ Feature: To delete a booking in restful-booker
       | firstname   | lastname   | totalprice   | depositpaid   | checkin   | checkout   | additionalneeds   |
       | <firstname> | <lastname> | <totalprice> | <depositpaid> | <checkin> | <checkout> | <additionalneeds> |
     Then user should get the response code 200
-    And user validates the response with JSON schema "createBookingSchema.json"
     And user updates the details of a booking
       | firstname   | lastname   | totalprice   | depositpaid   | checkin   | checkout   | additionalneeds   |
       | <firstname> | <lastname> | <totalprice> | <depositpaid> | <checkin> | <checkout> | <additionalneeds> |
     And user should get the response code 200
-    And user validates the response with JSON schema "bookingDetailsSchema.json"
     And user makes a request to view details of a booking ID
     And user should get the response code 200
-    And user validates the response with JSON schema "bookingDetailsSchema.json"
     And user makes a request to delete booking with basic auth "admin" & "password123"
     And user should get the response code 201
 

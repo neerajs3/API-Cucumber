@@ -9,8 +9,6 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 import com.api.model.BookingDetails;
-import com.api.utils.ExcelUtils;
-import com.api.utils.JsonReader;
 import com.api.utils.ResponseHandler;
 import com.api.utils.TestContext;
 
@@ -34,9 +32,7 @@ public class UpdateBookingStepdefinition {
 				.when().post(context.session.get("endpoint").toString());
 		String token = context.response.path("token");
 		LOG.info("Auth Token: "+token);
-		context.session.put("token", "token="+token);	
-		System.out.println("hello");
-		System.out.println("hello");
+		context.session.put("token", "token="+token);
 		
 	}
 

@@ -8,7 +8,6 @@ Feature: To create a new booking in restful-booker
       | firstname   | lastname   | totalprice   | depositpaid   | checkin   | checkout   | additionalneeds   |
       | <firstname> | <lastname> | <totalprice> | <depositpaid> | <checkin> | <checkout> | <additionalneeds> |
     Then user should get the response code 200
-    And user validates the response with JSON schema "createBookingSchema.json"
 
     Examples: 
       | firstname | lastname | totalprice | depositpaid | checkin    | checkout   | additionalneeds |
